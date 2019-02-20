@@ -50,8 +50,9 @@
     </div>
 	<p class="short-input ue-clear">
     	<label>性别：</label>
-    	<input name="sex" type="radio" value="男" checked="checked" />男
-		<input name="sex" type="radio" value="女"  />女
+
+    	<input name="sex" type="radio" value="男" <?php if($data["sex"] == 男 ): ?>checked="checked"<?php endif; ?> />男
+		<input name="sex" type="radio" value="女" <?php if($data["sex"] == 女 ): ?>checked="checked"<?php endif; ?> />女
     </p>
     <p class="short-input ue-clear">
         <label>生日：</label>

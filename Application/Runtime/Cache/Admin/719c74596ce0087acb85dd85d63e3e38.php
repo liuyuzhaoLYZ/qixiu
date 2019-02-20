@@ -52,7 +52,7 @@
                 <td class="addtime"><?php echo (date('Y-m-d H:i:s',$vol["addtime"])); ?></td>
                 <td class="status"><?php if($vol["isread"] == 0): ?><span style="color: red;">未读</span><?php else: ?><span style="color: grey">已读</span><?php endif; ?></td>
                 <td class="operate">
-                	<a href ='javascript:;'>删除</a>
+                	<a href="javascript:;" class="delect" data='<?php echo ($vol["id"]); ?>'>删除</a>
                 </td>
             </tr><?php endforeach; endif; else: echo "" ;endif; ?>
         </tbody>
@@ -82,5 +82,17 @@ $(".select-list").on("click","li",function(){
 $("tbody").find("tr:odd").css("backgroundColor","#eff6fa");
 
 showRemind('input[type=text], textarea','placeholder');
+
+$(function(){
+    //给删除按钮绑定点击事件
+    $('.delect').on('click',function(){
+        //事件处理程序
+        var id = $(this).attr('data') ;    //接收处理后的部门id值，组成id1,id2,id3...
+
+        //带着参数跳转到del方法
+        window.location.href = '/myoA/index.php/Admin/Email/del/id/' + id;
+    });
+});
+
 </script>
 </html>

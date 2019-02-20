@@ -3,7 +3,7 @@
  * @Author: liuyuzhao
  * @Date:   2019-01-30 17:36:14
  * @Last Modified by:   liuyuzhao
- * @Last Modified time: 2019-02-07 15:48:58
+ * @Last Modified time: 2019-02-18 15:47:39
  */
 //命名空间声明
 namespace Admin\Controller;
@@ -120,10 +120,26 @@ class UserController extends CommonController{
             $result = $model -> delete($id);
             if($result !== false){
                     //成功
-                    $this -> success('添加成功','',1);
+                    $this -> success('删除成功','',1);
                 }else{
                     //失败
-                    $this ->error('添加失败','',1);
+                    $this ->error('删除失败','',1);
                 }
+    }
+
+
+     public function showContent(){
+
+        //接受id
+        $id = I('get.id');
+        //查询数据
+        $data = M('User') -> find($id);
+        //传输数据
+        echo"昵称：" . $data['nickname'] . "</br>";
+        echo"性别：" . $data['sex'] . "</br>";
+        echo"电话：" . $data['tel'] . "</br>";
+        echo"生日：" . $data['birthday'] . "</br>";
+        echo"邮箱：" . $data['email'] . "</br>";
+        echo"备注：" . $data['remark'] . "</br>";
     }
 }

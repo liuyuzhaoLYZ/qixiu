@@ -49,7 +49,7 @@
                 <td class="name">{$vol.truename}</td>
                 <td class="name">{$vol.title}</td>
 				<td class="file">{$vol.filename}<if condition="$vol.hasfile == 1">【<a href="__CONTROLLER__/download/id/{$vol.id}">下载</a>】</if></td>
-                <td class="content">{$vol.content}</td>
+                <td class="content">{$vol.content|msubstr=0,8}</td>
                 <td class="addtime">{$vol.addtime|date='Y-m-d H:i:s',###}</td>
                 <td class="status"><if condition='$vol.isread == 0'><span style="color: red;">未读</span><else/><span style="color: grey">已读</span></if></td>
                 <td class="operate">

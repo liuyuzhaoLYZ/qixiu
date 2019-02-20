@@ -3,7 +3,7 @@
  * @Author: liuyuzhao
  * @Date:   2019-02-02 17:21:46
  * @Last Modified by:   liuyuzhao
- * @Last Modified time: 2019-02-07 16:33:58
+ * @Last Modified time: 2019-02-18 15:56:45
  */
 //命名空间声明
 namespace Admin\Controller;
@@ -110,4 +110,26 @@ class DocController extends CommonController{
         //传输数据
         echo htmlspecialchars_decode($data['content']);
     }
+
+
+
+    //del方法
+    public function del(){
+
+        //接受id
+        $id = I('get.id');
+        //实例化模型
+        $model = M('Doc');
+        //删除
+        $result = $model -> delete($id);
+        if($result !== false){
+                //成功
+                $this -> success('删除成功','',1);
+            }else{
+                //失败
+                $this ->error('删除失败','',1);
+            }
+
+    }
+
 }

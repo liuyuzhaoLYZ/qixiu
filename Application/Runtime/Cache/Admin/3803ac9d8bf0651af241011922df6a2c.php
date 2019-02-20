@@ -48,7 +48,7 @@
                 <td class="name"><?php echo ($vol["truename"]); ?></td>
                 <td class="name"><?php echo ($vol["title"]); ?></td>
 				<td class="file"><?php echo ($vol["filename"]); if($vol["hasfile"] == 1): ?>【<a href="/myoA/index.php/Admin/Email/download/id/<?php echo ($vol["id"]); ?>">下载</a>】<?php endif; ?></td>
-                <td class="content"><?php echo ($vol["content"]); ?></td>
+                <td class="content"><?php echo (msubstr($vol["content"],0,8)); ?></td>
                 <td class="addtime"><?php echo (date('Y-m-d H:i:s',$vol["addtime"])); ?></td>
                 <td class="status"><?php if($vol["isread"] == 0): ?><span style="color: red;">未读</span><?php else: ?><span style="color: grey">已读</span><?php endif; ?></td>
                 <td class="operate">

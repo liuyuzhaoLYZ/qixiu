@@ -56,7 +56,7 @@
 				<td class="tel"><?php echo ($vol["tel"]); ?></td>
 				<td class="email"><?php echo ($vol["email"]); ?></td>
                 <td class="addtime"><?php echo (date('Y-m-d H:i:s',$vol["addtime"])); ?></td>
-                <td class="operate"><a href="javascript:;">查看</a>|<a href="/myoA/index.php/Admin/User/edit/id/<?php echo ($vol["id"]); ?>">编辑</a>|<input type="checkbox" class="deptid" value="<?php echo ($vol["id"]); ?>"/></td>
+                <td class="operate"><a href="javascript:;" class='show' data='<?php echo ($vol["id"]); ?>' data-name='<?php echo ($vol["username"]); ?>' data-sex='<?php echo ($vol["sex"]); ?>' data-birthday='<?php echo ($vol["birthday"]); ?>' data-tel='<?php echo ($vol["tel"]); ?>' data-email='<?php echo ($vol["email"]); ?>'>查看</a>|<a href="/myoA/index.php/Admin/User/edit/id/<?php echo ($vol["id"]); ?>">编辑</a>|<input type="checkbox" class="deptid" value="<?php echo ($vol["id"]); ?>"/></td>
             </tr><?php endforeach; endif; else: echo "" ;endif; ?>
         </tbody>
     </table>
@@ -71,6 +71,7 @@
 <script type="text/javascript" src="/myoA/Public/Admin/js/jquery.js"></script>
 <script type="text/javascript" src="/myoA/Public/Admin/js/common.js"></script>
 <script type="text/javascript" src="/myoA/Public/Admin/js/WdatePicker.js"></script>
+<script type="text/javascript" src="/myoA/Public/Admin/plugin/layer/layer.js"></script>
 <script type="text/javascript">
 $(".select-title").on("click",function(){
 	$(".select-list").hide();
@@ -112,6 +113,25 @@ $(function(){
         }
         //带着参数跳转到del方法
         window.location.href = '/myoA/index.php/Admin/User/del/id/' + id;
+    });
+});
+
+//查看
+//jQuery代码
+$(function(){
+    //给查看按钮绑定点击事件
+    $('.show').on('click',function(){
+        //获取id
+        var id = $(this).attr('data');
+        var name = $(this).attr('data-name');
+        layer.open({
+            type: 2,
+            title: name,
+            shadeClose: true,
+            shade: 0.3,   //背景透明
+            area: ['560px', '90%'],
+            content: '/myoA/index.php/Admin/User/showContent/id/' + id //iframe的url
+        });
     });
 });
 </script>

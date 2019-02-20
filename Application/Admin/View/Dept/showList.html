@@ -37,18 +37,18 @@
                 <td class="process"><if condition='$vol.pid == 0'>顶级部门<else/>{$vol.deptname}</if></td>
                 <td class="node">{$vol.sort}</td>
                 <td class="time">{$vol.remark}</td>
-                <td class="operate"><a href="javascript:;">查看</a>|<a href="__CONTROLLER__/edit/id/{$vol.id}">编辑</a>|<input type="checkbox" class="deptid" value="{$vol.id}"/></td>
+                <td class="operate"><a href="javascript:;" class='show' data-name='{$vol.name}' data-remark='{$vol.remark}' data='{$vol.id}'>查看</a>|<a href="__CONTROLLER__/edit/id/{$vol.id}">编辑</a>|<input type="checkbox" class="deptid" value="{$vol.id}"/></td>
             </tr>
             </volist>
         </tbody>
     </table>
 </div>
-<div class="pagination ue-clear"></div>
 </body>
 <script type="text/javascript" src="__ADMIN__/js/jquery.js"></script>
 <script type="text/javascript" src="__ADMIN__/js/common.js"></script>
-<script type="text/javascript" src="j__ADMIN__/s/WdatePicker.js"></script>
+<script type="text/javascript" src="__ADMIN__/js/WdatePicker.js"></script>
 <script type="text/javascript" src="__ADMIN__/js/jquery.pagination.js"></script>
+<script type="text/javascript" src="__ADMIN__/plugin/layer/layer.js"></script>
 <script type="text/javascript">
 $(".select-title").on("click",function(){
 	$(".select-list").hide();
@@ -72,6 +72,8 @@ $("tbody").find("tr:odd").css("backgroundColor","#eff6fa");
 
 showRemind('input[type=text], textarea','placeholder');
 
+
+//删除
 //jQuery代码
 $(function(){
     //给删除按钮绑定点击事件
@@ -91,6 +93,28 @@ $(function(){
         }
         //带着参数跳转到del方法
         window.location.href = '__CONTROLLER__/del/id/' + id;
+    });
+});
+
+
+//查看
+//jQuery代码
+$(function(){
+    //给查看按钮绑定点击事件
+    $('.show').on('click',function(){
+        //获取id
+        var id = $(this).attr('data');
+        var title = $(this).attr('data-name');
+        //获取公文标题
+        var remark = $(this).attr('data-remark');
+        layer.open({
+            type: 2,
+            title: title,
+            shadeClose: true,
+            shade: 0.3,   //背景透明
+            area: ['560px', '90%'],
+            content: '__CONTROLLER__/showContent/id/' + id //iframe的url
+        });
     });
 });
 </script>

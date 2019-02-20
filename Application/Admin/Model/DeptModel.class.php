@@ -5,6 +5,8 @@ namespace Admin\Model;
 use Think\Model;
 //声明模型并且继承父类模型
 class DeptModel extends Model{
+    // 添加时调用create方法允许接收的字段
+    protected $insertFields = 'name,sort,remark';
     //自动验证定义
     protected $_validate     =  array(
             //部门规则：必填，不为空

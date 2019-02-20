@@ -21,28 +21,30 @@
 </head>
 
 <body>
-<div class="title"><h2>发送邮件</h2></div>
+<div class="title"><h2>添加知识</h2></div>
 <form action="" method="post" enctype="multipart/form-data">
 <div class="main">
 	<p class="short-input ue-clear">
-    	<label>收件人：</label>
-        <select name="to_id">
-        	<option value="0">请选择收件人</option>
-            <?php if(is_array($data)): $i = 0; $__LIST__ = $data;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vol): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vol["id"]); ?>"><?php echo ($vol["truename"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
-        </select>
-    </p>
-	<p class="short-input ue-clear">
     	<label>标题：</label>
-        <input name="title" type="text" placeholder="标题..." />
+        <input name="title" type="text" placeholder="标题..." value="<?php echo ($data["title"]); ?>" />
     </p>
+    <input type="hidden" name="id" value="<?php echo ($data["id"]); ?>">
 	<p class="short-input ue-clear">
-    	<label>附件：</label>
-        <input name="file" type="file"/>
+    	<label>缩略图：</label>
+        <input name="thumb" type="file"/>
+        <img src="<?php echo ($data["thumb"]); ?>"/>
     </p>
     <p class="short-input ue-clear">
-    	<label>内容：
-        <script id="editor" name='content' type="text/plain" style="width:800px;height:300px;"></script>
-        </label>
+    	<label>作者：</label>
+        <input name="author" type="text" placeholder="作者..." value="<?php echo ($data["author"]); ?>" />
+    </p>
+    <p class="short-input ue-clear">
+    	<label>描述：</label>
+        <textarea name="description" style="font-family:Microsoft YaHei !important; font-size:14px;" placeholder="请输入描述..." ><?php echo ($data["description"]); ?></textarea>
+    </p>
+    <p class="short-input ue-clear">
+    	<label>内容：</label>
+        <textarea name="content" style="font-family:Microsoft YaHei !important; font-size:14px;" placeholder="请输入内容..." ><?php echo ($data["content"]); ?></textarea>
     </p>
 </div>
 <div class="btn ue-clear">
@@ -54,11 +56,7 @@
 <script type="text/javascript" src="/myoA/Public/Admin/js/jquery.js"></script>
 <script type="text/javascript" src="/myoA/Public/Admin/js/common.js"></script>
 <script type="text/javascript" src="/myoA/Public/Admin/js/WdatePicker.js"></script>
-<script type="text/javascript" src="/myoA/Public/Admin/plugin/ue/ueditor.config.js"></script>
-<script type="text/javascript" src="/myoA/Public/Admin/plugin/ue/ueditor.all.min.js"></script>
-<script type="text/javascript" src="/myoA/Public/Admin/plugin/ue/lang/zh-ch/zh-ch.js"></script>
 <script type="text/javascript">
-var ue = UE.getEditor('editor');
 $(function(){
 	$('#btnSubmit').on('click',function(){
 		$('form').submit();

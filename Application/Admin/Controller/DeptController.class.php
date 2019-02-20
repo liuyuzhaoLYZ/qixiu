@@ -57,7 +57,6 @@ class DeptController extends CommonController{
 		$data = getTree($data);
 		//传数据
 		$this ->assign('data',$data);
-		//显示模板
 		$this ->display();
 	}
 
@@ -75,10 +74,10 @@ class DeptController extends CommonController{
 			//判断返回值
 			if($result !== false){
 				//成功
-				$this -> success('添加成功',U('showList'),1);
+				$this -> success('编辑成功',U('showList'),1);
 			}else{
 				//失败
-				$this ->error('添加失败','',1);
+				$this ->error('编辑失败','',1);
 
 			}
 		}else{
@@ -111,11 +110,22 @@ class DeptController extends CommonController{
 		$result = $model -> delete($id);
 		if($result !== false){
 				//成功
-				$this -> success('添加成功','',1);
+				$this -> success('删除成功','',1);
 			}else{
 				//失败
-				$this ->error('添加失败','',1);
+				$this ->error('删除失败','',1);
 			}
 
 	}
+
+
+    public function showContent(){
+
+        //接受id
+        $id = I('get.id');
+        //查询数据
+        $data = M('Dept') -> find($id);
+        //传输数据
+        echo $data['remark'];
+    }
 }

@@ -50,7 +50,7 @@
                 <td class="content"><?php echo ($vol["author"]); ?></td>
                 <td class="addtime"><?php echo (date('Y-m-d H:i:s',$vol["addtime"])); ?></td>
                 <td class="operate">
-                	<a href ='javascript:;'>查看</a>
+                	<a href ='javascript:;' class='show' data-title='<?php echo ($vol["title"]); ?>' data='<?php echo ($vol["id"]); ?>'>查看</a>|<a href="/myoA/index.php/Admin/Knowledge/edit/id/<?php echo ($vol["id"]); ?>">编辑</a>|<a href="javascript:;" class="delect" data='<?php echo ($vol["id"]); ?>'>删除</a>
                 </td>
             </tr><?php endforeach; endif; else: echo "" ;endif; ?>
         </tbody>
@@ -66,6 +66,7 @@
 <script type="text/javascript" src="/myoA/Public/Admin/js/jquery.js"></script>
 <script type="text/javascript" src="/myoA/Public/Admin/js/common.js"></script>
 <script type="text/javascript" src="/myoA/Public/Admin/js/WdatePicker.js"></script>
+<script type="text/javascript" src="/myoA/Public/Admin/plugin/layer/layer.js"></script>
 <script type="text/javascript">
 $(".select-title").on("click",function(){
 	$(".select-list").hide();
@@ -80,5 +81,36 @@ $(".select-list").on("click","li",function(){
 $("tbody").find("tr:odd").css("backgroundColor","#eff6fa");
 
 showRemind('input[type=text], textarea','placeholder');
+
+
+//查看
+//jQuery代码
+$(function(){
+    //给查看按钮绑定点击事件
+    $('.show').on('click',function(){
+        //获取id
+        var id = $(this).attr('data');
+        var title = $(this).attr('data-title');
+        layer.open({
+            type: 2,
+            title: title,
+            shadeClose: true,
+            shade: 0.3,   //背景透明
+            area: ['560px', '90%'],
+            content: '/myoA/index.php/Admin/Knowledge/showContent/id/' + id //iframe的url
+        });
+    });
+});
+
+$(function(){
+    //给删除按钮绑定点击事件
+    $('.delect').on('click',function(){
+        //事件处理程序
+        var id = $(this).attr('data') ;    //接收处理后的部门id值，组成id1,id2,id3...
+
+        //带着参数跳转到del方法
+        window.location.href = '/myoA/index.php/Admin/Knowledge/del/id/' + id;
+    });
+});
 </script>
 </html>

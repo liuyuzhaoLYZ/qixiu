@@ -36,17 +36,17 @@
                 <td class="process"><?php if($vol["pid"] == 0): ?>顶级部门<?php else: echo ($vol["deptname"]); endif; ?></td>
                 <td class="node"><?php echo ($vol["sort"]); ?></td>
                 <td class="time"><?php echo ($vol["remark"]); ?></td>
-                <td class="operate"><a href="javascript:;">查看</a>|<a href="/myoA/index.php/Admin/Dept/edit/id/<?php echo ($vol["id"]); ?>">编辑</a>|<input type="checkbox" class="deptid" value="<?php echo ($vol["id"]); ?>"/></td>
+                <td class="operate"><a href="javascript:;" class='show' data-name='<?php echo ($vol["name"]); ?>' data-remark='<?php echo ($vol["remark"]); ?>' data='<?php echo ($vol["id"]); ?>'>查看</a>|<a href="/myoA/index.php/Admin/Dept/edit/id/<?php echo ($vol["id"]); ?>">编辑</a>|<input type="checkbox" class="deptid" value="<?php echo ($vol["id"]); ?>"/></td>
             </tr><?php endforeach; endif; else: echo "" ;endif; ?>
         </tbody>
     </table>
 </div>
-<div class="pagination ue-clear"></div>
 </body>
 <script type="text/javascript" src="/myoA/Public/Admin/js/jquery.js"></script>
 <script type="text/javascript" src="/myoA/Public/Admin/js/common.js"></script>
-<script type="text/javascript" src="j/myoA/Public/Admin/s/WdatePicker.js"></script>
+<script type="text/javascript" src="/myoA/Public/Admin/js/WdatePicker.js"></script>
 <script type="text/javascript" src="/myoA/Public/Admin/js/jquery.pagination.js"></script>
+<script type="text/javascript" src="/myoA/Public/Admin/plugin/layer/layer.js"></script>
 <script type="text/javascript">
 $(".select-title").on("click",function(){
 	$(".select-list").hide();
@@ -70,6 +70,8 @@ $("tbody").find("tr:odd").css("backgroundColor","#eff6fa");
 
 showRemind('input[type=text], textarea','placeholder');
 
+
+//删除
 //jQuery代码
 $(function(){
     //给删除按钮绑定点击事件
@@ -89,6 +91,28 @@ $(function(){
         }
         //带着参数跳转到del方法
         window.location.href = '/myoA/index.php/Admin/Dept/del/id/' + id;
+    });
+});
+
+
+//查看
+//jQuery代码
+$(function(){
+    //给查看按钮绑定点击事件
+    $('.show').on('click',function(){
+        //获取id
+        var id = $(this).attr('data');
+        var title = $(this).attr('data-name');
+        //获取公文标题
+        var remark = $(this).attr('data-remark');
+        layer.open({
+            type: 2,
+            title: title,
+            shadeClose: true,
+            shade: 0.3,   //背景透明
+            area: ['560px', '90%'],
+            content: '/myoA/index.php/Admin/Dept/showContent/id/' + id //iframe的url
+        });
     });
 });
 </script>

@@ -57,7 +57,7 @@
 				<td class="tel">{$vol.tel}</td>
 				<td class="email">{$vol.email}</td>
                 <td class="addtime">{$vol.addtime|date='Y-m-d H:i:s',###}</td>
-                <td class="operate"><a href="javascript:;">查看</a>|<a href="__CONTROLLER__/edit/id/{$vol.id}">编辑</a>|<input type="checkbox" class="deptid" value="{$vol.id}"/></td>
+                <td class="operate"><a href="javascript:;" class='show' data='{$vol.id}' data-name='{$vol.username}' data-sex='{$vol.sex}' data-birthday='{$vol.birthday}' data-tel='{$vol.tel}' data-email='{$vol.email}'>查看</a>|<a href="__CONTROLLER__/edit/id/{$vol.id}">编辑</a>|<input type="checkbox" class="deptid" value="{$vol.id}"/></td>
             </tr>
             </volist>
         </tbody>
@@ -73,6 +73,7 @@
 <script type="text/javascript" src="__PUBLIC__/Admin/js/jquery.js"></script>
 <script type="text/javascript" src="__PUBLIC__/Admin/js/common.js"></script>
 <script type="text/javascript" src="__PUBLIC__/Admin/js/WdatePicker.js"></script>
+<script type="text/javascript" src="__ADMIN__/plugin/layer/layer.js"></script>
 <script type="text/javascript">
 $(".select-title").on("click",function(){
 	$(".select-list").hide();
@@ -114,6 +115,25 @@ $(function(){
         }
         //带着参数跳转到del方法
         window.location.href = '__CONTROLLER__/del/id/' + id;
+    });
+});
+
+//查看
+//jQuery代码
+$(function(){
+    //给查看按钮绑定点击事件
+    $('.show').on('click',function(){
+        //获取id
+        var id = $(this).attr('data');
+        var name = $(this).attr('data-name');
+        layer.open({
+            type: 2,
+            title: name,
+            shadeClose: true,
+            shade: 0.3,   //背景透明
+            area: ['560px', '90%'],
+            content: '__CONTROLLER__/showContent/id/' + id //iframe的url
+        });
     });
 });
 </script>

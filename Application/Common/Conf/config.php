@@ -15,6 +15,7 @@ return array(
     'DB_PWD'                =>  '123456',          // 密码
     'DB_PORT'               =>  '3306',        // 端口
     'DB_PREFIX'             =>  'sp_',    // 数据库表前缀
+    'DEFAULT_FILTER' => 'trim,htmlspecialchars',
 
         //RBAC权限数据信息
     //角色数组

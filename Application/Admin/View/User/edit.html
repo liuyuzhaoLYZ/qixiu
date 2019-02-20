@@ -52,8 +52,9 @@
     </div>
 	<p class="short-input ue-clear">
     	<label>性别：</label>
-    	<input name="sex" type="radio" value="男" checked="checked" />男
-		<input name="sex" type="radio" value="女"  />女
+
+    	<input name="sex" type="radio" value="男" <if condition='$data.sex == 男 '>checked="checked"</if> />男
+		<input name="sex" type="radio" value="女" <if condition='$data.sex == 女 '>checked="checked"</if> />女
     </p>
     <p class="short-input ue-clear">
         <label>生日：</label>

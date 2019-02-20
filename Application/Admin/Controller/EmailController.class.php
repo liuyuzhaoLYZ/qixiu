@@ -3,7 +3,7 @@
  * @Author: liuyuzhao
  * @Date:   2019-02-05 15:45:22
  * @Last Modified by:   liuyuzhao
- * @Last Modified time: 2019-02-07 18:31:17
+ * @Last Modified time: 2019-02-18 17:54:57
  */
 //命名空间声明
 namespace Admin\Controller;
@@ -84,7 +84,7 @@ class EmailController extends CommonController{
             M('Email') -> save(array('id' => $id,'isread' => 1));
         }
         //传输数据
-        echo $data['content'];
+        echo htmlspecialchars_decode($data['content']);
     }
     public function getCount(){
         if(IS_AJAX){
@@ -93,4 +93,23 @@ class EmailController extends CommonController{
             echo $count;
        }
     }
+
+    public function del(){
+
+        //接受id
+        $id = I('get.id');
+        //实例化模型
+        $model = M('Email');
+        //删除
+        $result = $model -> delete($id);
+        if($result !== false){
+                //成功
+                $this -> success('删除成功','',1);
+            }else{
+                //失败
+                $this ->error('删除失败','',1);
+            }
+
+    }
+
 }

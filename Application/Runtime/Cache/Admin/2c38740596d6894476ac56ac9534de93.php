@@ -49,7 +49,7 @@
                 <td class="content"><?php echo ($vol["author"]); ?></td>
                 <td class="addtime"><?php echo (date('Y-m-d H:i:s',$vol["addtime"])); ?></td>
                 <td class="operate">
-                	<a href ='javascript:;' class='show' data='<?php echo ($vol["id"]); ?>' data-title='<?php echo ($vol["title"]); ?>'>查看</a>|<a href="/myoA/index.php/Admin/Doc/edit/id/<?php echo ($vol["id"]); ?>">编辑</a>
+                	<a href ='javascript:;' class='show' data='<?php echo ($vol["id"]); ?>' data-title='<?php echo ($vol["title"]); ?>'>查看</a>|<a href="/myoA/index.php/Admin/Doc/edit/id/<?php echo ($vol["id"]); ?>">编辑</a>|<a href="javascript:;" class="delect" data='<?php echo ($vol["id"]); ?>'>删除</a><input type="checkbox" class="deptid" value="<?php echo ($vol["id"]); ?>"/>
                 </td>
             </tr><?php endforeach; endif; else: echo "" ;endif; ?>
         </tbody>
@@ -98,5 +98,40 @@ $(function(){
         });
     });
 });
+
+//删除
+//jQuery代码
+$(function(){
+    //给删除按钮绑定点击事件
+    $('.del').on('click',function(){
+        //事件处理程序
+        var idObj = $(':checkbox:checked'); //获取全部已经被选中的checkbox
+        var id = '';    //接收处理后的部门id值，组成id1,id2,id3...
+        //循环遍历idObj对象，获取其中的每一个值
+        for (var i = 0; i < idObj.length; i++) {
+            id += idObj[i].value + ',';
+        }
+        //去掉最后逗号
+        id = id.substring(0,id.length - 1);
+        //判断id
+        if(id == ''){
+            return false;
+        }
+        //带着参数跳转到del方法
+        window.location.href = '/myoA/index.php/Admin/Doc/del/id/' + id;
+    });
+});
+
+$(function(){
+    //给删除按钮绑定点击事件
+    $('.delect').on('click',function(){
+        //事件处理程序
+        var id = $(this).attr('data') ;    //接收处理后的部门id值，组成id1,id2,id3...
+
+        //带着参数跳转到del方法
+        window.location.href = '/myoA/index.php/Admin/Doc/del/id/' + id;
+    });
+});
+
 </script>
 </html>
